@@ -74,11 +74,19 @@
       </article>
     </section>
 
-    <section class="album reveal" aria-label="Наша история">
-      <div class="album__pattern" aria-hidden="true"></div>
-      <figure class="polaroid polaroid--one"><img src="assets/couple-close.webp" alt="Пара вместе" loading="lazy"><figcaption data-i18n="momentOne">вместе — наше любимое место</figcaption></figure>
-      <div class="album__words"><span data-i18n="ourStory">Наша история</span><b>∞</b></div>
-      <figure class="polaroid polaroid--two"><img src="assets/couple-walk.webp" alt="Пара на прогулке" loading="lazy"><figcaption data-i18n="momentTwo">и впереди целая жизнь</figcaption></figure>
+    <section class="countdown reveal" aria-labelledby="countdownTitle">
+      <div class="countdown__pattern" aria-hidden="true"></div>
+      <div class="countdown__frame">
+        <p class="section-kicker section-kicker--light" data-i18n="untilSmall">До нашего дня</p>
+        <h2 class="script-heading script-heading--light" id="countdownTitle" data-i18n="untilWedding">До свадьбы осталось</h2>
+        <div class="countdown__grid" id="countdown">
+          <div><strong data-count="days">000</strong><span data-i18n="days">дней</span></div>
+          <div><strong data-count="hours">00</strong><span data-i18n="hours">часов</span></div>
+          <div><strong data-count="minutes">00</strong><span data-i18n="minutes">минут</span></div>
+          <div><strong data-count="seconds">00</strong><span data-i18n="seconds">секунд</span></div>
+        </div>
+        <div class="countdown__ornament" aria-hidden="true"><span></span><b>♥</b><span></span></div>
+      </div>
     </section>
 
     <section class="timeline paper" id="program">
