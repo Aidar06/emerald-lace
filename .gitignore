@@ -1,5 +1,7 @@
 production/jobs/
 production/*.mp4
 production/frames/
+.tools/
+verification-*.png
 *.tar.gz
 .DS_Store
