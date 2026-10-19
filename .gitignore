@@ -1,0 +1,5 @@
+production/jobs/
+production/*.mp4
+production/frames/
+*.tar.gz
+.DS_Store

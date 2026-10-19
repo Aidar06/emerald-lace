@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17291f">
+  <title>Свадебное приглашение</title>
+  <meta name="description" content="Персональное приглашение на свадьбу">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Свадебное приглашение">
+  <meta property="og:description" content="Будем счастливы разделить этот день вместе">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="intro-locked">
+  <div class="intro" id="intro" aria-label="Открыть приглашение">
+    <img class="intro__poster" src="assets/envelope-closed.webp" alt="Закрытый свадебный конверт" fetchpriority="high">
+    <video class="intro__video" id="introVideo" muted playsinline preload="auto" poster="assets/envelope-closed.webp">
+      <source src="assets/envelope-opening.mp4" type="video/mp4">
+    </video>
+    <button class="intro__button" id="openInvitation" type="button">
+      <span data-i18n="open">Открыть приглашение</span>
+      <span class="intro__spark" aria-hidden="true">✦</span>
+    </button>
+    <div class="intro__glow" aria-hidden="true"></div>
+  </div>
+
+  <div class="locale-switch" role="group" aria-label="Язык">
+    <button type="button" data-lang="ru" class="active">RU</button><span></span><button type="button" data-lang="ky">KG</button>
+  </div>
+
+  <main id="site">
+    <section class="hero" id="welcome">
+      <div class="hero__image" aria-hidden="true"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__frame">
+        <p class="eyebrow" data-i18n="invitation">Приглашение</p>
+        <h1 class="hero__names"><span data-name="first">Бекзат</span><i>&amp;</i><span data-name="second">Алина</span></h1>
+        <p class="hero__date" data-date="long">12 июня 2027</p>
+        <div class="hero__ornament" aria-hidden="true"><span></span><b>❧</b><span></span></div>
+      </div>
+      <a class="hero__scroll" href="#letter" aria-label="Листать ниже"><span></span></a>
+    </section>
+
+    <div class="lace lace--hero" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <section class="paper letter reveal" id="letter">
+      <div class="paper__sprig paper__sprig--left" aria-hidden="true">❧</div>
+      <p class="section-kicker" data-i18n="dear">Дорогие родные и друзья</p>
+      <h2 class="script-heading" data-i18n="dearScript">Дорогие гости</h2>
+      <p class="letter__copy" data-content="welcome">Есть моменты, которые хочется разделить с самыми близкими. Будем счастливы видеть вас рядом в день рождения нашей семьи.</p>
+      <div class="monogram" aria-hidden="true"><span data-initial="first">Б</span><b>·</b><span data-initial="second">А</span></div>
+      <p class="letter__signature" data-i18n="signature">С любовью и нежностью</p>
+    </section>
+
+    <section class="details paper reveal" id="details">
+      <article class="calendar-card">
+        <p class="section-kicker" data-i18n="whenSmall">Когда</p>
+        <h2 class="script-heading" data-date="monthYear">Июнь 2027</h2>
+        <div class="ornate-box">
+          <div class="calendar" id="calendar"></div>
+        </div>
+        <p class="details__time"><span data-date="weekday">Суббота</span> · <span data-date="time">16:30</span></p>
+      </article>
+
+      <article class="location-card">
+        <div class="location-card__leaf" aria-hidden="true">⌇</div>
+        <p class="section-kicker" data-i18n="whereSmall">Где</p>
+        <h2 class="script-heading" data-i18n="location">Локация</h2>
+        <p class="venue-type" data-venue="type">Банкетный зал</p>
+        <h3 data-venue="name">Изумруд</h3>
+        <p data-venue="address">г. Бишкек, ул. Чуй, 123</p>
+        <a class="pill-button" id="mapLink" href="#" target="_blank" rel="noopener" data-i18n="map">Открыть карту</a>
+      </article>
+    </section>
+
+    <section class="album reveal" aria-label="Наша история">
+      <div class="album__pattern" aria-hidden="true"></div>
+      <figure class="polaroid polaroid--one"><img src="assets/couple-close.webp" alt="Пара вместе" loading="lazy"><figcaption data-i18n="momentOne">вместе — наше любимое место</figcaption></figure>
+      <div class="album__words"><span data-i18n="ourStory">Наша история</span><b>∞</b></div>
+      <figure class="polaroid polaroid--two"><img src="assets/couple-walk.webp" alt="Пара на прогулке" loading="lazy"><figcaption data-i18n="momentTwo">и впереди целая жизнь</figcaption></figure>
+    </section>
+
+    <section class="timeline paper" id="program">
+      <div class="timeline__heading reveal"><p class="section-kicker" data-i18n="programSmall">В этот день</p><h2 class="script-heading" data-i18n="timing">Тайминг</h2></div>
+      <div class="timeline__list" id="schedule"></div>
+    </section>
+
+    <div class="lace lace--dark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+    <section class="rsvp" id="rsvp">
+      <div class="rsvp__inner reveal">
+        <p class="section-kicker section-kicker--light" data-i18n="answerSmall">Ваш ответ</p>
+        <h2 class="script-heading script-heading--light" data-i18n="rsvp">Будете с нами?</h2>
+        <p class="rsvp__lead" data-i18n="rsvpLead">Пожалуйста, подтвердите присутствие — нам важно подготовить всё с заботой.</p>
+        <form id="rsvpForm">
+          <label><span data-i18n="yourName">Ваше имя</span><input name="name" required autocomplete="name" maxlength="80"></label>
+          <fieldset><legend data-i18n="attendance">Вы сможете прийти?</legend><label class="choice"><input type="radio" name="attending" value="yes" checked><span data-i18n="yes">С радостью приду</span></label><label class="choice"><input type="radio" name="attending" value="no"><span data-i18n="no">К сожалению, не смогу</span></label></fieldset>
+          <label><span data-i18n="count">Количество гостей</span><select name="guests_count"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+          <label><span data-i18n="wish">Пожелание молодожёнам</span><textarea name="wish" rows="3" maxlength="500"></textarea></label>
+          <button class="cream-button" type="submit"><span data-i18n="send">Отправить ответ</span></button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+        <button class="guest-button" id="openGuests" type="button"><span data-i18n="guestList">Список гостей</span><b>↗</b></button>
+      </div>
+    </section>
+
+    <footer><p class="footer__names"><span data-name="first">Бекзат</span> <i>&amp;</i> <span data-name="second">Алина</span></p><p data-date="short">12 · 06 · 2027</p></footer>
+  </main>
+
+  <div class="sheet" id="guestSheet" aria-hidden="true">
+    <button class="sheet__backdrop" data-close-sheet aria-label="Закрыть"></button>
+    <section class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="guestTitle">
+      <div class="sheet__handle"></div>
+      <div class="sheet__top"><div><p class="section-kicker" data-i18n="ourGuestsSmall">С любовью</p><h2 id="guestTitle" class="script-heading" data-i18n="guestList">Список гостей</h2></div><button class="sheet__close" data-close-sheet aria-label="Закрыть">×</button></div>
+      <div class="guests" id="guestList"></div>
+    </section>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
