@@ -29,3 +29,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero__image,.intro__button,.hero__scroll span{animation:none}.reveal{opacity:1;transform:none;transition:none}}
 
 
+
+.map-buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.map-buttons .pill-button{margin-top:25px}.pill-button--alt{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}.pill-button--alt:hover{color:var(--cream)}@media(max-width:430px){.map-buttons{width:100%;flex-direction:column}.map-buttons .pill-button{width:100%;margin-top:12px}}

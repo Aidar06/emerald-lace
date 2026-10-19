@@ -43,7 +43,7 @@ function render(){
   $('[data-date="weekday"]').textContent=date.toLocaleDateString(locale==='ky'?'ky-KG':'ru-RU',{weekday:'long',timeZone:config.timezone});
   $('[data-date="time"]').textContent=date.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:config.timezone});
   $('[data-date="short"]').textContent=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:config.timezone}).format(date).replaceAll('.',' · ').replace(/ · $/,'');
-  $('#mapLink').href=config.mapUrl||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venue.address+' '+data.venue.name)}`;
+  const mapQuery=[data.venue.name,data.venue.address].filter(Boolean).join(', ');$('#googleMapLink').href=config.mapUrl||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;$('#twoGisLink').href=`https://2gis.com/search/${encodeURIComponent(mapQuery)}`;
   renderCalendar(date);renderSchedule(data.schedule);renderGuests(config.guests||[]);updateCountdown();updateMetadata(long);
 }
 
