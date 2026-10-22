@@ -89,7 +89,7 @@ $$('[data-lang]').forEach(button=>button.addEventListener('click',()=>{locale=bu
 
 const intro=$('#intro'),video=$('#introVideo');
 function finishIntro(){intro.classList.add('is-ending');setTimeout(()=>{intro.classList.add('is-done');document.body.classList.remove('intro-locked');sessionStorage.setItem('emerald-lace-opened','1')},650)}
-$('#openInvitation').addEventListener('click',async()=>{
+intro.addEventListener('click',async()=>{
   if(intro.classList.contains('is-playing'))return;
   intro.classList.add('is-playing');
   try{video.currentTime=0;await video.play()}catch{setTimeout(finishIntro,4700)}
