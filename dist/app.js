@@ -11,10 +11,10 @@ Object.assign(dictionary.ky,{untilSmall:'Эң маанилүү күн алдыд
 Object.assign(dictionary.kk,{untilSmall:'Ең маңызды күн алда',untilWedding:'Тойға дейін қалды',days:'күн',hours:'сағат',minutes:'минут',seconds:'секунд'});
 
 let locale=localStorage.getItem('emerald-lace-language')||'ru';
-let config=null, rawRecord=null, inviteId=null;
+let config=null, rawRecord=null, inviteId=null, fallback=null;
 
 async function loadData(){
-  const fallback=await fetch('./content.json',{cache:'no-cache'}).then(r=>r.json());
+  fallback=await fetch('./content.json',{cache:'no-cache'}).then(r=>r.json());
   inviteId=invitationIdFromPath(location.pathname,fallback.backend.defaultId);
   if(!inviteId){inviteId=String(fallback.backend.defaultId)}
   try{
@@ -24,7 +24,7 @@ async function loadData(){
     config=adaptXanoInvitation(rawRecord,fallback);
   }catch(error){console.warn('Using invitation fallback',error);config=fallback;rawRecord=null}
   const enabled=config.enabledLanguages||['ru','ky'];if(!enabled.includes(locale))locale=config.defaultLanguage||enabled[0];
-  const switcher=$('.locale-switch');$$('[data-lang]',switcher).forEach(button=>button.hidden=!enabled.includes(button.dataset.lang));switcher.hidden=enabled.length<2;
+  const switcher=$('.language-menu');$$('[data-lang]',switcher).forEach(button=>button.hidden=!enabled.includes(button.dataset.lang));switcher.hidden=enabled.length<2;
   render();
 }
 
@@ -32,6 +32,7 @@ function render(){
   document.documentElement.lang=locale;
   document.body.classList.toggle('lang-ky',locale!=='ru');
   $$('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===locale));
+  $('.language-menu__current').textContent=locale==='ky'?'KG':locale==='kk'?'KZ':'RU';
   $$('[data-i18n]').forEach(el=>{const value=dictionary[locale][el.dataset.i18n];if(value)el.textContent=value});
   $$('[data-name="first"]').forEach(el=>el.textContent=config.names.first);
   $$('[data-name="second"]').forEach(el=>el.textContent=config.names.second);
@@ -51,7 +52,7 @@ function render(){
   $('[data-date="short"]').textContent=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:config.timezone}).format(date).replaceAll('.',' · ').replace(/ · $/,'');
   const mapBox=$('.map-buttons');mapBox.hidden=!config.map?.enabled;$('#googleMapLink').hidden=!config.map?.googleUrl;$('#twoGisLink').hidden=!config.map?.twoGisUrl;$('#googleMapLink').href=config.map?.googleUrl||'#';$('#twoGisLink').href=config.map?.twoGisUrl||'#';
   const wish=$('#wishBlock');wish.hidden=!config.wishBlock?.enabled;if(!wish.hidden){$('#wishBlockTitle').textContent=data.wishTitle;$('#wishBlockText').textContent=data.wishText}
-  $('#rsvp').hidden=config.rsvp?.enabled===false;$('#guestWishField').hidden=config.rsvp?.allowGuestWish===false;configureGuestCount();configureMusic();
+  $('#rsvp').hidden=config.rsvp?.enabled===false;$('#guestWishField').hidden=config.rsvp?.allowGuestWish===false;configureGuestCount();
   renderCalendar(date);renderSchedule(data.schedule);updateCountdown();updateMetadata(long);
 }
 
@@ -70,8 +71,6 @@ function renderSchedule(items){
 }
 
 function configureGuestCount(){const select=$('[name="guests_count"]'),max=config.rsvp?.maxGuests||10;select.replaceChildren(...Array.from({length:max},(_,index)=>Object.assign(document.createElement('option'),{value:String(index+1),textContent:String(index+1)})))}
-function configureMusic(){const audio=$('#backgroundMusic'),button=$('#musicToggle'),music=config.music||{};button.hidden=!(music.enabled&&music.url);if(button.hidden){audio.pause();return}if(audio.src!==new URL(music.url,location.href).href)audio.src=music.url;audio.volume=Math.max(0,Math.min(1,Number(music.volume) || .6))}
-
 function updateCountdown(){
   if(!config)return;
   const remaining=Math.max(0,new Date(config.date).getTime()-Date.now());
@@ -90,9 +89,10 @@ function updateMetadata(date){
 
 function escapeHtml(value=''){const div=document.createElement('div');div.textContent=String(value);return div.innerHTML}
 
-$$('[data-lang]').forEach(button=>button.addEventListener('click',()=>{locale=button.dataset.lang;localStorage.setItem('emerald-lace-language',locale);if(config)render()}));
-
-$('#musicToggle').addEventListener('click',async()=>{const audio=$('#backgroundMusic');if(audio.paused){try{await audio.play()}catch{}}else audio.pause();$('#musicToggle').classList.toggle('is-playing',!audio.paused)});
+const languageMenu=$('.language-menu'),languageMenuToggle=$('.language-menu__toggle');
+languageMenuToggle.addEventListener('click',()=>{const open=languageMenu.classList.toggle('is-open');languageMenuToggle.setAttribute('aria-expanded',String(open))});
+document.addEventListener('click',event=>{if(!languageMenu.contains(event.target)){languageMenu.classList.remove('is-open');languageMenuToggle.setAttribute('aria-expanded','false')}});
+$$('[data-lang]').forEach(button=>button.addEventListener('click',()=>{locale=button.dataset.lang;localStorage.setItem('emerald-lace-language',locale);if(config)render();languageMenu.classList.remove('is-open');languageMenuToggle.setAttribute('aria-expanded','false')}));
 
 $('#rsvpForm').addEventListener('submit',async event=>{
   event.preventDefault();const form=event.currentTarget,button=$('button[type="submit"]',form),status=$('#formStatus');
