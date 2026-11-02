@@ -3,10 +3,12 @@ import {invitationIdFromPath,createGuestPatch,adaptXanoInvitation} from './backe
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const dictionary={
   ru:{open:'Открыть приглашение',invitation:'Приглашение на свадьбу',dear:'Для самых близких',dearScript:'Дорогие гости',signature:'С любовью и нежностью',whenSmall:'Сохраните дату',whereSmall:'Место встречи',location:'Локация',map:'Открыть карту',ourStory:'Наша история',momentOne:'вместе — наше любимое место',momentTwo:'и впереди целая жизнь',programSmall:'В этот день',timing:'Тайминг',answerSmall:'Ваш ответ',rsvp:'Будете с нами?',rsvpLead:'Пожалуйста, подтвердите присутствие — нам важно подготовить всё с заботой.',yourName:'Ваше имя',attendance:'Вы сможете прийти?',yes:'С радостью приду',no:'К сожалению, не смогу',count:'Количество гостей',wish:'Пожелание молодожёнам',send:'Отправить ответ',sending:'Отправляем…',sent:'Спасибо! Ваш ответ сохранён.',sendError:'Не удалось сохранить ответ. Попробуйте ещё раз.',guestList:'Список гостей',ourGuestsSmall:'С любовью',guests:'гостей',oneGuest:'гость',attending:'придёт',notAttending:'не придёт',emptyGuests:'Пока здесь нет ответов гостей.',weekdays:['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']},
-  ky:{open:'Чакырууну ачуу',invitation:'Үйлөнүү тоюна чакыруу',dear:'Эң жакындарыбызга',dearScript:'Кымбаттуу коноктор',signature:'Сүйүү жана назиктик менен',whenSmall:'Күндү белгилеп коюңуз',whereSmall:'Жолугушуу жери',location:'Дарек',map:'Картадан ачуу',ourStory:'Биздин баяныбыз',momentOne:'бирге — эң сүйүктүү жерибиз',momentTwo:'алдыда бүтүндөй өмүр бар',programSmall:'Бул күнү',timing:'Күндүн программасы',answerSmall:'Сиздин жообуңуз',rsvp:'Биз менен болосузбу?',rsvpLead:'Катышарыңызды ырастап коюңуз — баарын камкордук менен даярдоо биз үчүн маанилүү.',yourName:'Сиздин атыңыз',attendance:'Тойго келе аласызбы?',yes:'Кубануу менен келем',no:'Тилекке каршы, келе албайм',count:'Коноктордун саны',wish:'Жаштарга каалоо',send:'Жоопту жөнөтүү',sending:'Жөнөтүлүүдө…',sent:'Рахмат! Жообуңуз сакталды.',sendError:'Жооп сакталган жок. Кайра аракет кылыңыз.',guestList:'Коноктор тизмеси',ourGuestsSmall:'Сүйүү менен',guests:'конок',oneGuest:'конок',attending:'келет',notAttending:'келбейт',emptyGuests:'Азырынча коноктордон жооп жок.',weekdays:['Дш','Шш','Шр','Бш','Жм','Иш','Жк'],months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']}
+  ky:{open:'Чакырууну ачуу',invitation:'Үйлөнүү тоюна чакыруу',dear:'Эң жакындарыбызга',dearScript:'Кымбаттуу коноктор',signature:'Сүйүү жана назиктик менен',whenSmall:'Күндү белгилеп коюңуз',whereSmall:'Жолугушуу жери',location:'Дарек',map:'Картадан ачуу',ourStory:'Биздин баяныбыз',momentOne:'бирге — эң сүйүктүү жерибиз',momentTwo:'алдыда бүтүндөй өмүр бар',programSmall:'Бул күнү',timing:'Күндүн программасы',answerSmall:'Сиздин жообуңуз',rsvp:'Биз менен болосузбу?',rsvpLead:'Катышарыңызды ырастап коюңуз — баарын камкордук менен даярдоо биз үчүн маанилүү.',yourName:'Сиздин атыңыз',attendance:'Тойго келе аласызбы?',yes:'Кубануу менен келем',no:'Тилекке каршы, келе албайм',count:'Коноктордун саны',wish:'Жаштарга каалоо',send:'Жоопту жөнөтүү',sending:'Жөнөтүлүүдө…',sent:'Рахмат! Жообуңуз сакталды.',sendError:'Жооп сакталган жок. Кайра аракет кылыңыз.',weekdays:['Дш','Шш','Шр','Бш','Жм','Иш','Жк'],months:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']},
+  kk:{invitation:'Үйлену тойына шақыру',dear:'Ең жақындарымызға',signature:'Сүйіспеншілікпен',whenSmall:'Күнді сақтаңыз',whereSmall:'Кездесу орны',location:'Мекенжай',programSmall:'Осы күні',timing:'Күн бағдарламасы',answerSmall:'Сіздің жауабыңыз',rsvp:'Бізбен бірге боласыз ба?',rsvpLead:'Қатысатыныңызды растаңыз — мерекені қамқорлықпен дайындағымыз келеді.',yourName:'Сіздің атыңыз',attendance:'Тойға келе аласыз ба?',yes:'Қуана келемін',no:'Өкінішке қарай, келе алмаймын',count:'Қонақтар саны',wish:'Жас жұбайларға тілек',send:'Жауапты жіберу',sending:'Жіберілуде…',sent:'Рақмет! Жауабыңыз сақталды.',sendError:'Жауап сақталмады. Қайталап көріңіз.',weekdays:['Дс','Сс','Ср','Бс','Жм','Сб','Жс'],months:['Қаңтар','Ақпан','Наурыз','Сәуір','Мамыр','Маусым','Шілде','Тамыз','Қыркүйек','Қазан','Қараша','Желтоқсан']}
 };
 Object.assign(dictionary.ru,{untilSmall:'Самое важное впереди',untilWedding:'До свадьбы осталось',days:'дней',hours:'часов',minutes:'минут',seconds:'секунд'});
 Object.assign(dictionary.ky,{untilSmall:'Эң маанилүү күн алдыда',untilWedding:'Тойго чейин калды',days:'күн',hours:'саат',minutes:'мүнөт',seconds:'секунд'});
+Object.assign(dictionary.kk,{untilSmall:'Ең маңызды күн алда',untilWedding:'Тойға дейін қалды',days:'күн',hours:'сағат',minutes:'минут',seconds:'секунд'});
 
 let locale=localStorage.getItem('emerald-lace-language')||'ru';
 let config=null, rawRecord=null, inviteId=null;
@@ -21,12 +23,14 @@ async function loadData(){
     rawRecord=await response.json();
     config=adaptXanoInvitation(rawRecord,fallback);
   }catch(error){console.warn('Using invitation fallback',error);config=fallback;rawRecord=null}
+  const enabled=config.enabledLanguages||['ru','ky'];if(!enabled.includes(locale))locale=config.defaultLanguage||enabled[0];
+  const switcher=$('.locale-switch');$$('[data-lang]',switcher).forEach(button=>button.hidden=!enabled.includes(button.dataset.lang));switcher.hidden=enabled.length<2;
   render();
 }
 
 function render(){
-  document.documentElement.lang=locale==='ky'?'ky':'ru';
-  document.body.classList.toggle('lang-ky',locale==='ky');
+  document.documentElement.lang=locale;
+  document.body.classList.toggle('lang-ky',locale!=='ru');
   $$('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===locale));
   $$('[data-i18n]').forEach(el=>{const value=dictionary[locale][el.dataset.i18n];if(value)el.textContent=value});
   $$('[data-name="first"]').forEach(el=>el.textContent=config.names.first);
@@ -34,17 +38,21 @@ function render(){
   $('[data-initial="first"]').textContent=[...config.names.first][0]||'';
   $('[data-initial="second"]').textContent=[...config.names.second][0]||'';
   const data=config.locales[locale];
+  $('[data-content="welcomeTitle"]').textContent=data.welcomeTitle||dictionary[locale].dearScript||'';
   $('[data-content="welcome"]').textContent=data.welcome;
   $$('[data-venue]').forEach(el=>el.textContent=data.venue[el.dataset.venue]||'');
   const date=new Date(config.date);
-  const long=date.toLocaleDateString(locale==='ky'?'ky-KG':'ru-RU',{day:'numeric',month:'long',year:'numeric',timeZone:config.timezone});
+  const localeCode=locale==='ky'?'ky-KG':locale==='kk'?'kk-KZ':'ru-RU';
+  const long=date.toLocaleDateString(localeCode,{day:'numeric',month:'long',year:'numeric',timeZone:config.timezone});
   $('[data-date="long"]').textContent=long;
   $('[data-date="monthYear"]').textContent=`${dictionary[locale].months[date.getMonth()]} ${date.getFullYear()}`;
-  $('[data-date="weekday"]').textContent=date.toLocaleDateString(locale==='ky'?'ky-KG':'ru-RU',{weekday:'long',timeZone:config.timezone});
+  $('[data-date="weekday"]').textContent=date.toLocaleDateString(localeCode,{weekday:'long',timeZone:config.timezone});
   $('[data-date="time"]').textContent=date.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:config.timezone});
   $('[data-date="short"]').textContent=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric',timeZone:config.timezone}).format(date).replaceAll('.',' · ').replace(/ · $/,'');
-  const mapQuery=[data.venue.name,data.venue.address].filter(Boolean).join(', ');$('#googleMapLink').href=config.mapUrl||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;$('#twoGisLink').href=`https://2gis.com/search/${encodeURIComponent(mapQuery)}`;
-  renderCalendar(date);renderSchedule(data.schedule);renderGuests(config.guests||[]);updateCountdown();updateMetadata(long);
+  const mapBox=$('.map-buttons');mapBox.hidden=!config.map?.enabled;$('#googleMapLink').hidden=!config.map?.googleUrl;$('#twoGisLink').hidden=!config.map?.twoGisUrl;$('#googleMapLink').href=config.map?.googleUrl||'#';$('#twoGisLink').href=config.map?.twoGisUrl||'#';
+  const wish=$('#wishBlock');wish.hidden=!config.wishBlock?.enabled;if(!wish.hidden){$('#wishBlockTitle').textContent=data.wishTitle;$('#wishBlockText').textContent=data.wishText}
+  $('#rsvp').hidden=config.rsvp?.enabled===false;$('#guestWishField').hidden=config.rsvp?.allowGuestWish===false;configureGuestCount();configureMusic();
+  renderCalendar(date);renderSchedule(data.schedule);updateCountdown();updateMetadata(long);
 }
 
 function renderCalendar(date){
@@ -61,11 +69,8 @@ function renderSchedule(items){
   observeReveals();
 }
 
-function renderGuests(guests){
-  const holder=$('#guestList');
-  if(!guests.length){holder.innerHTML=`<p class="guest-empty">${dictionary[locale].emptyGuests}</p>`;return}
-  holder.innerHTML=guests.map(g=>`<article class="guest-card"><h3>${escapeHtml(g.name)}</h3><span class="guest-meta ${g.is_attending?'yes':'no'}">${g.is_attending?dictionary[locale].attending:dictionary[locale].notAttending} · ${Number(g.guests_count)||1} ${Number(g.guests_count)===1?dictionary[locale].oneGuest:dictionary[locale].guests}</span>${g.wish?`<p>“${escapeHtml(g.wish)}”</p>`:''}</article>`).join('');
-}
+function configureGuestCount(){const select=$('[name="guests_count"]'),max=config.rsvp?.maxGuests||10;select.replaceChildren(...Array.from({length:max},(_,index)=>Object.assign(document.createElement('option'),{value:String(index+1),textContent:String(index+1)})))}
+function configureMusic(){const audio=$('#backgroundMusic'),button=$('#musicToggle'),music=config.music||{};button.hidden=!(music.enabled&&music.url);if(button.hidden){audio.pause();return}if(audio.src!==new URL(music.url,location.href).href)audio.src=music.url;audio.volume=Math.max(0,Math.min(1,Number(music.volume) || .6))}
 
 function updateCountdown(){
   if(!config)return;
@@ -87,22 +92,7 @@ function escapeHtml(value=''){const div=document.createElement('div');div.textCo
 
 $$('[data-lang]').forEach(button=>button.addEventListener('click',()=>{locale=button.dataset.lang;localStorage.setItem('emerald-lace-language',locale);if(config)render()}));
 
-const intro=$('#intro'),video=$('#introVideo');
-function finishIntro(){intro.classList.add('is-ending');setTimeout(()=>{intro.classList.add('is-done');document.body.classList.remove('intro-locked');sessionStorage.setItem('emerald-lace-opened','1')},650)}
-intro.addEventListener('click',async()=>{
-  if(intro.classList.contains('is-playing'))return;
-  intro.classList.add('is-playing');
-  try{video.currentTime=0;await video.play()}catch{setTimeout(finishIntro,4700)}
-});
-video.addEventListener('ended',finishIntro);
-video.addEventListener('error',()=>setTimeout(finishIntro,4700));
-if(sessionStorage.getItem('emerald-lace-opened')==='1'||new URLSearchParams(location.search).has('skipIntro')){intro.classList.add('is-done');document.body.classList.remove('intro-locked')}
-
-const sheet=$('#guestSheet');
-function toggleSheet(open){sheet.classList.toggle('is-open',open);sheet.setAttribute('aria-hidden',String(!open));document.body.style.overflow=open?'hidden':'';if(open)$('.sheet__close').focus()}
-$('#openGuests').addEventListener('click',()=>toggleSheet(true));
-$$('[data-close-sheet]').forEach(el=>el.addEventListener('click',()=>toggleSheet(false)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleSheet(false)});
+$('#musicToggle').addEventListener('click',async()=>{const audio=$('#backgroundMusic');if(audio.paused){try{await audio.play()}catch{}}else audio.pause();$('#musicToggle').classList.toggle('is-playing',!audio.paused)});
 
 $('#rsvpForm').addEventListener('submit',async event=>{
   event.preventDefault();const form=event.currentTarget,button=$('button[type="submit"]',form),status=$('#formStatus');
@@ -114,7 +104,7 @@ $('#rsvpForm').addEventListener('submit',async event=>{
     const payload=createGuestPatch(fresh,inviteId,guest);
     const response=await fetch(`${base}/${inviteId}/full`,{method:'PATCH',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    rawRecord=payload;config=adaptXanoInvitation(payload,config);renderGuests(config.guests);form.reset();status.textContent=dictionary[locale].sent;
+    rawRecord=payload;config=adaptXanoInvitation(payload,fallback);form.reset();status.textContent=dictionary[locale].sent;
   }catch(error){console.error(error);status.textContent=dictionary[locale].sendError}
   finally{button.disabled=false;$('span',button).textContent=dictionary[locale].send}
 });
