@@ -3,6 +3,10 @@
   "outputDirectory": "dist",
   "routes": [
     {
+      "src": "/preview/?",
+      "dest": "/preview.html"
+    },
+    {
       "handle": "filesystem"
     },
     {
