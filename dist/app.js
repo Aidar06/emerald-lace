@@ -1,4 +1,4 @@
-import {invitationIdFromPath,createGuestPatch,adaptXanoInvitation} from './backend-adapter.js?v=3';
+import {invitationIdFromPath,createGuestPatch,adaptXanoInvitation} from './backend-adapter.js?v=4';
 
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const validMapUrl=value=>{try{const url=new URL(String(value||''));return ['http:','https:'].includes(url.protocol)?url.href:''}catch{return''}};
@@ -19,7 +19,7 @@ async function loadData(){
   inviteId=invitationIdFromPath(location.pathname,fallback.backend.defaultId);
   if(!inviteId){inviteId=String(fallback.backend.defaultId)}
   try{
-    const response=await fetch(`${fallback.backend.baseUrl}/${inviteId}`,{headers:{Accept:'application/json'}});
+    const response=await fetch(`${fallback.backend.baseUrl}/${encodeURIComponent(inviteId)}`,{headers:{Accept:'application/json'}});
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
     rawRecord=await response.json();
     config=adaptXanoInvitation(rawRecord,fallback);
@@ -101,11 +101,11 @@ $('#rsvpForm').addEventListener('submit',async event=>{
   button.disabled=true;$('span',button).textContent=dictionary[locale].sending;status.textContent='';
   try{
     const base=config.backend?.baseUrl||'https://x8ki-letl-twmt.n7.xano.io/api:X8-e2j1w/priglosi';
-    const fresh=await fetch(`${base}/${inviteId}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('read');return r.json()});
+    const fresh=await fetch(`${base}/${encodeURIComponent(inviteId)}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('read');return r.json()});
     const payload=createGuestPatch(fresh,inviteId,guest);
-    const response=await fetch(`${base}/${inviteId}/full`,{method:'PATCH',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
+    const response=await fetch(`${base}/${encodeURIComponent(inviteId)}/full`,{method:'PATCH',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    rawRecord=payload;config=adaptXanoInvitation(payload,fallback);form.reset();status.textContent=dictionary[locale].sent;
+    rawRecord={...fresh,...payload,public_id:inviteId};config=adaptXanoInvitation(rawRecord,fallback);form.reset();status.textContent=dictionary[locale].sent;
   }catch(error){console.error(error);status.textContent=dictionary[locale].sendError}
   finally{button.disabled=false;$('span',button).textContent=dictionary[locale].send}
 });
